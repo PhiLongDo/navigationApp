@@ -18,53 +18,57 @@
             android:id="@+id/edtPerson01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF"
             android:gravity="center"
             android:hint="B"
-            android:textColorHint="#9A9A9A"
-            android:layout_margin="2dp" />
+            android:inputType="textPersonName"
+            android:nextFocusDown="@id/edtPerson02"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9A9A9A" />
 
         <EditText
             android:id="@+id/edtPerson02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF"
             android:gravity="center"
             android:hint="B"
-            android:textColorHint="#9A9A9A"
-            android:layout_margin="2dp"/>
+            android:inputType="textPersonName"
+            android:nextFocusDown="@id/edtPerson03"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9A9A9A" />
 
         <EditText
             android:id="@+id/edtPerson03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF"
             android:gravity="center"
             android:hint="B"
-            android:textColorHint="#9A9A9A"
-            android:layout_margin="2dp" />
+            android:inputType="textPersonName"
+            android:nextFocusDown="@id/edtPerson04"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9A9A9A" />
 
         <EditText
             android:id="@+id/edtPerson04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#FFFFFF"
             android:gravity="center"
             android:hint="B"
-            android:textColorHint="#9A9A9A"
-            android:layout_margin="2dp" />
+            android:inputType="textPersonName"
+            android:nextFocusDown="@id/edtNum01"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9A9A9A" />
     </LinearLayout>
 
     <LinearLayout
@@ -138,77 +142,74 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <EditText
-                android:id="@+id/edtNum01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:hint="0"
-                android:textColorHint="#9A9A9A"
-                android:background="#F6F6F6"
-                android:padding="2dp"
-                android:layout_margin="2dp"
-                android:focusable="auto"/>
+        <EditText
+            android:id="@+id/edtNum01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="#F6F6F6"
+            android:ems="10"
+            android:focusable="auto"
+            android:gravity="center"
+            android:hint="0"
+            android:inputType="numberSigned"
+            android:nextFocusDown="@id/edtNum02"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textColorHint="#9A9A9A" />
 
-            <EditText
-                android:id="@+id/edtNum02"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:hint="0"
-                android:textColorHint="#9A9A9A"
-                android:background="#F6F6F6"
-                android:padding="2dp"
-                android:layout_margin="2dp"
-                android:focusable="auto"/>
+        <EditText
+            android:id="@+id/edtNum02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="#F6F6F6"
+            android:ems="10"
+            android:focusable="auto"
+            android:gravity="center"
+            android:hint="0"
+            android:inputType="numberSigned"
+            android:nextFocusDown="@id/edtNum03"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textColorHint="#9A9A9A" />
 
-            <EditText
-                android:id="@+id/edtNum03"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:hint="0"
-                android:textColorHint="#9A9A9A"
-                android:background="#F6F6F6"
-                android:padding="2dp"
-                android:layout_margin="2dp"
-                android:focusable="auto"/>
+        <EditText
+            android:id="@+id/edtNum03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="#F6F6F6"
+            android:ems="10"
+            android:focusable="auto"
+            android:gravity="center"
+            android:hint="0"
+            android:inputType="numberSigned"
+            android:nextFocusDown="@id/edtNum04"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textColorHint="#9A9A9A" />
 
-            <EditText
-                android:id="@+id/edtNum04"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textColor="#000000"
-                android:gravity="center"
-                android:hint="0"
-                android:textColorHint="#9A9A9A"
-                android:background="#F6F6F6"
-                android:padding="2dp"
-                android:layout_margin="2dp"
-                android:focusable="auto"/>
+        <EditText
+            android:id="@+id/edtNum04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="#F6F6F6"
+            android:ems="10"
+            android:focusable="auto"
+            android:gravity="center"
+            android:hint="0"
+            android:inputType="numberSigned"
+            android:nextFocusDown="@id/edtNum01"
+            android:padding="2dp"
+            android:textColor="#000000"
+            android:textColorHint="#9A9A9A" />
         </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:scrollbars="vertical"
-        android:focusable="false">
 
         <ListView
             android:id="@+id/lvPoints"
@@ -217,6 +218,5 @@
             android:background="#E8E3E3"
             android:focusable="false"
             android:scrollbars="vertical"/>
-    </LinearLayout>
 
 </LinearLayout>
