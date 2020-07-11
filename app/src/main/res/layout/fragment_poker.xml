@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".ui.info.InfoFragment"
     android:orientation="vertical"
-    android:padding="5sp">
-
-
+    android:padding="5dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -154,7 +151,8 @@
                 android:textColorHint="#9A9A9A"
                 android:background="#F6F6F6"
                 android:padding="2dp"
-                android:layout_margin="2dp"/>
+                android:layout_margin="2dp"
+                android:focusable="auto"/>
 
             <EditText
                 android:id="@+id/edtNum02"
@@ -169,7 +167,8 @@
                 android:textColorHint="#9A9A9A"
                 android:background="#F6F6F6"
                 android:padding="2dp"
-                android:layout_margin="2dp"/>
+                android:layout_margin="2dp"
+                android:focusable="auto"/>
 
             <EditText
                 android:id="@+id/edtNum03"
@@ -184,7 +183,8 @@
                 android:textColorHint="#9A9A9A"
                 android:background="#F6F6F6"
                 android:padding="2dp"
-                android:layout_margin="2dp"/>
+                android:layout_margin="2dp"
+                android:focusable="auto"/>
 
             <EditText
                 android:id="@+id/edtNum04"
@@ -199,37 +199,24 @@
                 android:textColorHint="#9A9A9A"
                 android:background="#F6F6F6"
                 android:padding="2dp"
-                android:layout_margin="2dp"/>
+                android:layout_margin="2dp"
+                android:focusable="auto"/>
         </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:scrollbars="vertical">
+        android:scrollbars="vertical"
+        android:focusable="false">
 
         <ListView
-            android:id="@+id/lvPoint01"
+            android:id="@+id/lvPoints"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ListView
-            android:id="@+id/lvPoint02"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ListView
-            android:id="@+id/lvPoint03"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ListView
-            android:id="@+id/lvPoint04"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-
+            android:layout_height="match_parent"
+            android:background="#E8E3E3"
+            android:focusable="false"
+            android:scrollbars="vertical"/>
     </LinearLayout>
 
 </LinearLayout>

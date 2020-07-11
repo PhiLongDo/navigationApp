@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="5dp">
+
+        <TextView
+            android:id="@+id/num01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#41FFC9"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:text="0"
+            android:layout_marginHorizontal="2dp"/>
+
+        <TextView
+            android:id="@+id/num02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#8AFF41"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="#000000"
+            android:text="0"
+            android:layout_marginHorizontal="2dp"/>
+
+        <TextView
+            android:id="@+id/num03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="#FFEB3B"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:layout_marginHorizontal="2dp" />
+
+        <TextView
+            android:id="@+id/num04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#F130FF"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:text="0"
+            android:layout_marginHorizontal="2dp"/>
+</LinearLayout>

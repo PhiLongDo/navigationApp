@@ -5,16 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.navigationapp.R;
 
@@ -26,10 +24,11 @@ public class PokerFragment extends Fragment {
     private Button btnAdd;
     private EditText edtNum01, edtNum02, edtNum03, edtNum04;
     private TextView sum01, sum02, sum03, sum04;
-    private ListView lvPoint01, lvPoint02, lvPoint03, lvPoint04;
+    private ListView lvPoints;
     private List<EditText> listEditText = new ArrayList<>();
-    private List<TextView> listTextView = new ArrayList<>();
-    private List<ListView> listListView = new ArrayList<>();
+    private List<TextView> listTextViewSum = new ArrayList<>();
+    private List<LinePoint> listItems = new ArrayList<>();
+    private LinePointAdapter linePointAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,29 +43,33 @@ public class PokerFragment extends Fragment {
         sum02 = root.findViewById(R.id.sum02);
         sum03 = root.findViewById(R.id.sum03);
         sum04 = root.findViewById(R.id.sum04);
-        lvPoint01 = root.findViewById(R.id.lvPoint01);
-        lvPoint02 = root.findViewById(R.id.lvPoint02);
-        lvPoint03 = root.findViewById(R.id.lvPoint03);
-        lvPoint04 = root.findViewById(R.id.lvPoint04);
+        lvPoints = root.findViewById(R.id.lvPoints);
 
         initList();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<String> listnum = new ArrayList<>();
                 for (int i=0; i<4; i++){
                     String num = listEditText.get(i).getText().toString();
                     if (num.length() == 0){
-                        listListView.get(i).addHeaderView(newItemList("0"));
+                        listnum.add("0");
                     }
                     else{
-                        listListView.get(i).addHeaderView(newItemList(num));
-                        listTextView.get(i).setText(
-                                ((Integer) (Integer.parseInt(listTextView.get(i).getText().toString())+Integer.parseInt(num))).toString()
-                        );
+                        Integer sum = (Integer) (Integer.parseInt(listTextViewSum.get(i).getText().toString())+Integer.parseInt(num));
+                        if (sum >= 0) {
+                            listTextViewSum.get(i).setText(sum.toString());
+                        } else {
+                            listTextViewSum.get(i).setText("0");
+                        }
+                        listnum.add(((Integer) Integer.parseInt(num)).toString());
                     }
                     listEditText.get(i).setText("");
                 }
+                listItems.add(0,new LinePoint(listnum.get(0),listnum.get(1),listnum.get(2),listnum.get(3)));
+                linePointAdapter = new LinePointAdapter(listItems);
+                lvPoints.setAdapter(linePointAdapter);
             }
         });
 
@@ -79,15 +82,11 @@ public class PokerFragment extends Fragment {
         listEditText.add(edtNum03);
         listEditText.add(edtNum04);
 
-        listTextView.add(sum01);
-        listTextView.add(sum02);
-        listTextView.add(sum03);
-        listTextView.add(sum04);
+        listTextViewSum.add(sum01);
+        listTextViewSum.add(sum02);
+        listTextViewSum.add(sum03);
+        listTextViewSum.add(sum04);
 
-        listListView.add(lvPoint01);
-        listListView.add(lvPoint02);
-        listListView.add(lvPoint03);
-        listListView.add(lvPoint04);
     }
     private TextView newItemList(String num){
         TextView tv = new TextView(getContext());
@@ -96,4 +95,99 @@ public class PokerFragment extends Fragment {
         return tv;
     }
 
+    class LinePoint{
+        String num1, num2, num3, num4;
+
+        public LinePoint(String num1, String num2, String num3, String num4) {
+            this.num1 = num1;
+            this.num2 = num2;
+            this.num3 = num3;
+            this.num4 = num4;
+        }
+
+        public String getNum1() {
+            return num1;
+        }
+
+        public void setNum1(String num1) {
+            this.num1 = num1;
+        }
+
+        public String getNum2() {
+            return num2;
+        }
+
+        public void setNum2(String num2) {
+            this.num2 = num2;
+        }
+
+        public String getNum3() {
+            return num3;
+        }
+
+        public void setNum3(String num3) {
+            this.num3 = num3;
+        }
+
+        public String getNum4() {
+            return num4;
+        }
+
+        public void setNum4(String num4) {
+            this.num4 = num4;
+        }
+    }
+
+    class ListLinePoint{
+        TextView num01,num02,num03,num04;
+    }
+
+    class LinePointAdapter extends BaseAdapter{
+
+        List<LinePoint> list;
+
+        public LinePointAdapter(List<LinePoint> list) {
+            this.list = list;
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return list.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ListLinePoint listLinePoint = null;
+            if (view == null){
+                listLinePoint = new ListLinePoint();
+                view = getLayoutInflater().inflate(R.layout.item_line_point, viewGroup,false);
+
+                listLinePoint.num01 = (TextView) view.findViewById(R.id.num01);
+                listLinePoint.num02 = (TextView) view.findViewById(R.id.num02);
+                listLinePoint.num03 = (TextView) view.findViewById(R.id.num03);
+                listLinePoint.num04 = (TextView) view.findViewById(R.id.num04);
+
+                view.setTag(listLinePoint);
+            } else {
+                listLinePoint = (ListLinePoint) view.getTag();
+            }
+
+            listLinePoint.num01.setText(list.get(i).getNum1());
+            listLinePoint.num02.setText(list.get(i).getNum2());
+            listLinePoint.num03.setText(list.get(i).getNum3());
+            listLinePoint.num04.setText(list.get(i).getNum4());
+
+            return view;
+        }
+    }
 }
