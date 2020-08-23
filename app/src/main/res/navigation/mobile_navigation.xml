@@ -23,6 +23,12 @@
         android:label="@string/menu_poker"
         tools:layout="@layout/fragment_poker" />
 
+    <fragment
+        android:id="@+id/nav_flip_game"
+        android:name="com.example.navigationapp.ui.flipgame.FlipGameFragment"
+        android:label="@string/menu_flip_game"
+        tools:layout="@layout/fragment_images_flip_game" />
+
     <fragment android:id="@+id/nav_info"
         android:name="com.example.navigationapp.ui.info.InfoFragment"
         android:label="@string/menu_info"

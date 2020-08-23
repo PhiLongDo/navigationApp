@@ -76,6 +76,21 @@ public class PokerFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        btnAdd = null;
+        edtNum01 = null;
+        edtNum02 = null;
+        edtNum03 = null;
+        edtNum04 = null;
+        sum01 = null;
+        sum02 = null;
+        sum03 = null;
+        sum04 = null;
+        lvPoints = null;
+    }
+
     private void initList(){
         listEditText.add(edtNum01);
         listEditText.add(edtNum02);

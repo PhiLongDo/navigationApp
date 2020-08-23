@@ -13,6 +13,7 @@
     <string name="menu_touch_counter">Touch counter</string>
     <string name="menu_info">Info</string>
     <string name="menu_poker">Poker</string>
+    <string name="menu_flip_game">Flip Game</string>
 
     <string name="auth_name">Đỗ Phi Long</string>
     <string name="auth_email">longdo805@gmail.com</string>

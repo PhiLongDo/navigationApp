@@ -12,10 +12,17 @@
             android:id="@+id/nav_touch_counter"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_touch_counter" />
+
         <item
             android:id="@+id/nav_poker"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_poker"
             android:title="@string/menu_poker"/>
+
+        <item
+            android:id="@+id/nav_flip_game"
+            android:icon="@drawable/ic_menu_flipgame"
+            android:title="@string/menu_flip_game"/>
+
         <item
             android:id="@+id/nav_info"
             android:icon="@drawable/ic_menu_info"
