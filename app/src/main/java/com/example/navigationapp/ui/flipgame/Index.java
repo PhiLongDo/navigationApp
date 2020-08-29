@@ -1,5 +1,7 @@
 package com.example.navigationapp.ui.flipgame;
 
+import androidx.annotation.Nullable;
+
 public class Index {
 
     public int x, y;
@@ -14,8 +16,15 @@ public class Index {
         this.y = y;
     }
 
-    public void Reset(){
+    public void Reset() {
         this.x = 0;
         this.y = 0;
+    }
+
+    public boolean equals(Index obj) {
+        if (obj.x == this.x && obj.y == this.y) {
+            return true;
+        }
+        return false;
     }
 }

@@ -114,7 +114,10 @@ public class FlipGameFragment extends Fragment {
                             inValue = matrixGame[indexB.x][indexB.y].getValue();
                             return;
                         }
-
+                        if (indexA.equals(indexB)){     // block double click
+                            countOn = 1;
+                            return;
+                        }
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -134,7 +137,7 @@ public class FlipGameFragment extends Fragment {
                                 countOn = 0;
                                 inValue = "";
                             }
-                        }, 400);
+                        }, 350);
                     }
                 });
             }
