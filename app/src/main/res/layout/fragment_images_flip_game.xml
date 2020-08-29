@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:background="#00FF0A"
+                android:background="#FFEB3B"
                 android:text="1x1"
                 android:textColor="#FF0000"
                 android:textSize="18sp"

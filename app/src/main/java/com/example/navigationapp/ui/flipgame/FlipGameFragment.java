@@ -1,7 +1,8 @@
 package com.example.navigationapp.ui.flipgame;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,23 @@ import androidx.fragment.app.Fragment;
 
 import com.example.navigationapp.R;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class FlipGameFragment extends Fragment {
 
+    private Random random;
     private ItemGame[][] matrixGame = new ItemGame[7][6];
+    private String[][] markIndex = new String[7][6];
+    ;
     private Button btnReset;
     private View root;
+    //private String[] simple = {"🎄", "🎐", "🎁", "🎠", "🎭", "🧶", "🥋", "🔔", "🧾", "📝", "🖊", "📆", "🎿", "📨", "\uD83D\uDE0D", "⚔", "📦"};
+    private String[] simple = {"🐵","🦁","🦝","🐭","🐨","🐴","🦄","🐔","🐲","🦓","🦊","🐱","🙊","🦢","🦚","🦋","🐌","🐝","🦗","🐞"};
+    private ArrayList<Index> arrayIndex = new ArrayList<>();
+    private int countOn = 0;
+    private String inValue = "";
+    private Index indexA = new Index();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,27 +86,87 @@ public class FlipGameFragment extends Fragment {
         matrixGame[6][5] = new ItemGame((Button) root.findViewById(R.id.btn_6x5));
     }
 
-    private void initActionGame(){
+    private void initActionGame() {
         for (int i = 1; i <= 6; i++) {
             for (int j = 1; j <= 5; j++) {
                 matrixGame[i][j].getBtn_ixj().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        view.setVisibility(View.INVISIBLE);
+                        final Button inAction = (Button) view;
+                        int onX = 0, onY = 0;
+                        for (onX = 1; onX <= 6; onX++) {
+                            for (onY = 1; onY <= 5; onY++) {
+                                if (matrixGame[onX][onY].getBtn_ixj().getId() == inAction.getId()) {
+                                    break;
+                                }
+                            }
+                            if (onY <= 5) {
+                                break;
+                            }
+                        }
+                        countOn++;
+                        matrixGame[onX][onY].getBtn_ixj().setText(matrixGame[onX][onY].getValue());
+                        matrixGame[onX][onY].getBtn_ixj().setBackgroundColor(Color.parseColor("#FFEB3B"));
+                        final Index indexB = new Index(onX, onY);
+                        if (countOn == 1) {
+                            indexA.x = indexB.x;
+                            indexA.y = indexB.y;
+                            inValue = matrixGame[indexB.x][indexB.y].getValue();
+                            return;
+                        }
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Do something after 1s = 1000ms
+                                if (inValue.equals(matrixGame[indexB.x][indexB.y].getValue())) {
+                                    inAction.setVisibility(View.INVISIBLE);
+                                    matrixGame[indexA.x][indexA.y].getBtn_ixj().setVisibility(View.INVISIBLE);
+                                } else {
+                                    matrixGame[indexB.x][indexB.y].getBtn_ixj().setText("\uD83D\uDD78");
+                                    matrixGame[indexB.x][indexB.y].getBtn_ixj().setBackgroundColor(Color.parseColor("#00FF0A"));
+
+                                    matrixGame[indexA.x][indexA.y].getBtn_ixj().setText("\uD83D\uDD78");
+                                    matrixGame[indexA.x][indexA.y].getBtn_ixj().setBackgroundColor(Color.parseColor("#00FF0A"));
+                                }
+                                indexA.Reset();
+                                countOn = 0;
+                                inValue = "";
+                            }
+                        }, 400);
                     }
                 });
             }
         }
     }
 
-    private void resetGame(){
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 1; j <= 5; j++) {
-                Log.i("info",i+"_"+j);
+    private void resetGame() {
+        random = new Random();
+        arrayIndex.clear();
+        int i, j;
+        for (i = 1; i <= 6; i++) {
+            for (j = 1; j <= 5; j++) {
+                arrayIndex.add((new Index(i, j)));
                 matrixGame[i][j].getBtn_ixj().setVisibility(View.VISIBLE);
-                matrixGame[i][j].getBtn_ixj().setText("△");
-                matrixGame[i][j].setValue(i*j);
+                matrixGame[i][j].getBtn_ixj().setText("\uD83D\uDD78");
+                matrixGame[i][j].getBtn_ixj().setBackgroundColor(Color.parseColor("#00FF0A"));
+                markIndex[i][j] = "";
             }
         }
+        i = 0;
+        j = 0;
+        while (arrayIndex.size() > 1) {
+            j++;
+            int position = random.nextInt(arrayIndex.size() - 1);
+            matrixGame[arrayIndex.get(position).x][arrayIndex.get(position).y].setValue(simple[i]);
+            //matrixGame[arrayIndex.get(position).x][arrayIndex.get(position).y].getBtn_ixj().setText(simple[i]);
+            arrayIndex.remove(position);
+            if (j == 2) {
+                i++;
+                j = 0;
+            }
+        }
+        matrixGame[arrayIndex.get(0).x][arrayIndex.get(0).y].setValue(simple[i]);
     }
 }
