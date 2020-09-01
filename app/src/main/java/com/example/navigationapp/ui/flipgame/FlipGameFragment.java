@@ -92,6 +92,7 @@ public class FlipGameFragment extends Fragment {
                 matrixGame[i][j].getBtn_ixj().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        reEnableGamePlay(false);
                         final Button inAction = (Button) view;
                         int onX = 0, onY = 0;
                         for (onX = 1; onX <= 6; onX++) {
@@ -112,10 +113,12 @@ public class FlipGameFragment extends Fragment {
                             indexA.x = indexB.x;
                             indexA.y = indexB.y;
                             inValue = matrixGame[indexB.x][indexB.y].getValue();
+                            reEnableGamePlay(true);
                             return;
                         }
                         if (indexA.equals(indexB)){     // block double click
                             countOn = 1;
+                            reEnableGamePlay(true);
                             return;
                         }
                         Handler handler = new Handler();
@@ -136,8 +139,9 @@ public class FlipGameFragment extends Fragment {
                                 indexA.Reset();
                                 countOn = 0;
                                 inValue = "";
+                                reEnableGamePlay(true);
                             }
-                        }, 350);
+                        }, 400);
                     }
                 });
             }
@@ -171,5 +175,15 @@ public class FlipGameFragment extends Fragment {
             }
         }
         matrixGame[arrayIndex.get(0).x][arrayIndex.get(0).y].setValue(simple[i]);
+    }
+
+    private void reEnableGamePlay(Boolean isEnable){
+        int i,j;
+        for (i = 1; i <= 6; i++) {
+            for (j = 1; j <= 5; j++) {
+                arrayIndex.add((new Index(i, j)));
+                matrixGame[i][j].getBtn_ixj().setEnabled(isEnable);
+            }
+        }
     }
 }
