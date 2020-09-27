@@ -20,8 +20,6 @@ public class FlipGameFragment extends Fragment {
 
     private Random random;
     private ItemGame[][] matrixGame = new ItemGame[7][6];
-    private String[][] markIndex = new String[7][6];
-    ;
     private Button btnReset;
     private View root;
     //private String[] simple = {"🎄", "🎐", "🎁", "🎠", "🎭", "🧶", "🥋", "🔔", "🧾", "📝", "🖊", "📆", "🎿", "📨", "\uD83D\uDE0D", "⚔", "📦"};
@@ -30,12 +28,14 @@ public class FlipGameFragment extends Fragment {
     private int countOn = 0;
     private String inValue = "";
     private Index indexA = new Index();
+    //private MediaPlayer mediaPlayer;
+    private int countdown, width, height;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_images_flip_game, container, false);
-
+        //mediaPlayer = MediaPlayer.create(this.getContext(),R.raw.tok);
         initGame();
         initActionGame();
         btnReset = root.findViewById(R.id.btn_reset);
@@ -49,11 +49,18 @@ public class FlipGameFragment extends Fragment {
             }
         });
 
-
         return root;
     }
 
+    /*@Override
+    public void onPause() {
+        super.onPause();
+        //mediaPlayer.release();
+    }*/
+
     private void initGame() {
+        width = 5;
+        height = 6;
         matrixGame[1][1] = new ItemGame((Button) root.findViewById(R.id.btn_1x1));
         matrixGame[1][2] = new ItemGame((Button) root.findViewById(R.id.btn_1x2));
         matrixGame[1][3] = new ItemGame((Button) root.findViewById(R.id.btn_1x3));
@@ -92,9 +99,19 @@ public class FlipGameFragment extends Fragment {
                 matrixGame[i][j].getBtn_ixj().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Handler handler = new Handler();
+                       /* //------------------------------------------------------------------------------
+                        mediaPlayer.start();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mediaPlayer.stop();
+                            }
+                        }, 100);*/
+                        //------------------------------------------------------------------------------
                         reEnableGamePlay(false);
                         final Button inAction = (Button) view;
-                        int onX = 0, onY = 0;
+                        int onX, onY = 0;
                         for (onX = 1; onX <= 6; onX++) {
                             for (onY = 1; onY <= 5; onY++) {
                                 if (matrixGame[onX][onY].getBtn_ixj().getId() == inAction.getId()) {
@@ -121,7 +138,6 @@ public class FlipGameFragment extends Fragment {
                             reEnableGamePlay(true);
                             return;
                         }
-                        Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -129,6 +145,10 @@ public class FlipGameFragment extends Fragment {
                                 if (inValue.equals(matrixGame[indexB.x][indexB.y].getValue())) {
                                     inAction.setVisibility(View.INVISIBLE);
                                     matrixGame[indexA.x][indexA.y].getBtn_ixj().setVisibility(View.INVISIBLE);
+                                    countdown -= 2;
+                                    if (countdown <= 0){
+                                        btnReset.setVisibility(View.VISIBLE);
+                                    }
                                 } else {
                                     matrixGame[indexB.x][indexB.y].getBtn_ixj().setText("\uD83D\uDD78");
                                     matrixGame[indexB.x][indexB.y].getBtn_ixj().setBackgroundColor(Color.parseColor("#00FF0A"));
@@ -149,16 +169,16 @@ public class FlipGameFragment extends Fragment {
     }
 
     private void resetGame() {
+        btnReset.setVisibility(View.GONE);
         random = new Random();
         arrayIndex.clear();
         int i, j;
-        for (i = 1; i <= 6; i++) {
-            for (j = 1; j <= 5; j++) {
+        for (i = 1; i <= height; i++) {
+            for (j = 1; j <= width; j++) {
                 arrayIndex.add((new Index(i, j)));
                 matrixGame[i][j].getBtn_ixj().setVisibility(View.VISIBLE);
                 matrixGame[i][j].getBtn_ixj().setText("\uD83D\uDD78");
                 matrixGame[i][j].getBtn_ixj().setBackgroundColor(Color.parseColor("#00FF0A"));
-                markIndex[i][j] = "";
             }
         }
         i = 0;
@@ -175,6 +195,7 @@ public class FlipGameFragment extends Fragment {
             }
         }
         matrixGame[arrayIndex.get(0).x][arrayIndex.get(0).y].setValue(simple[i]);
+        countdown = width*height;
     }
 
     private void reEnableGamePlay(Boolean isEnable){
